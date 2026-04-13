@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKNR+ — Skincare Berbasis Sains</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0c0c0c;--ink2:#1a1a1a;--ink3:#2c2c2c;
+  --gray:#888;--gray2:#bbb;--gray3:#e0e0e0;
+  --off:#f5f5f3;--white:#ffffff;
+  --accent:#c8ff00;--accent2:#a8d800;
+}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--ink);font-family:'Space Grotesk',sans-serif;overflow-x:hidden}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:1px solid var(--gray3);padding:0 2.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-left{display:flex;gap:.5rem;align-items:center}
+.nav-pill{border:1px solid var(--gray3);border-radius:100px;padding:6px 14px;font-size:11px;letter-spacing:.5px;font-weight:500;background:transparent;cursor:pointer;display:flex;align-items:center;gap:4px;transition:background .2s,border-color .2s,color .2s;font-family:'Space Grotesk',sans-serif}
+.nav-pill:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.nav-logo{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;letter-spacing:2px;position:absolute;left:50%;transform:translateX(-50%)}
+.nav-right{display:flex;gap:.5rem;align-items:center}
+.nav-icon{border:1px solid var(--gray3);border-radius:100px;padding:6px 16px;font-size:11px;font-weight:500;background:transparent;cursor:pointer;transition:all .2s;font-family:'Space Grotesk',sans-serif}
+.nav-icon:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.cart-btn{background:var(--ink);color:var(--white);border:none;border-radius:100px;padding:6px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:background .2s}
+.cart-btn:hover{background:var(--ink3)}
+
+/* HERO */
+.hero{padding:4rem 2.5rem 0;border-bottom:1px solid var(--gray3)}
+.hero h1{font-size:clamp(48px,8vw,88px);font-weight:700;letter-spacing:-3px;line-height:.95;color:var(--ink);text-transform:uppercase;margin-bottom:2rem}
+.hero h1 span{color:var(--gray2)}
+
+/* FILTER */
+.filter-bar{display:flex;gap:0;border-top:1px solid var(--gray3);overflow-x:auto;scrollbar-width:none}
+.filter-bar::-webkit-scrollbar{display:none}
+.fcat{padding:1rem 1.5rem;border-right:1px solid var(--gray3);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.5rem;min-width:100px;transition:background .2s;background:var(--white);border-bottom:none;border-top:none;border-left:none;font-family:'Space Grotesk',sans-serif}
+.fcat:last-child{border-right:none}
+.fcat.active{background:var(--ink)}
+.fcat.active .fcat-label{color:var(--white)}
+.fcat.active .fcat-icon{border-color:rgba(255,255,255,0.2);color:var(--white)}
+.fcat-icon{width:36px;height:36px;border:1px solid var(--gray3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s}
+.fcat-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);font-weight:600;transition:color .2s}
+.fcat-tag{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--gray2);border:1px solid var(--gray3);border-radius:100px;padding:1px 6px}
+
+/* PRODUCTS */
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gray3)}
+.prod-card{background:var(--white);padding:2rem;cursor:pointer;position:relative;overflow:hidden;transition:background .3s}
+.prod-card:hover{background:var(--off)}
+.prod-card.featured{background:var(--ink);grid-column:span 2}
+.prod-card.featured:hover{background:var(--ink2)}
+.prod-card.wide{grid-column:span 3;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.prod-img{aspect-ratio:1;border-radius:4px;overflow:hidden;margin-bottom:1.25rem;position:relative;background:var(--off)}
+.prod-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.prod-card:hover .prod-img img{transform:scale(1.04)}
+.prod-card.wide .prod-img{aspect-ratio:4/3;margin-bottom:0}
+.prod-new{position:absolute;top:12px;left:12px;background:var(--accent);color:var(--ink);font-size:8px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:100px;z-index:2}
+.prod-category{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:.5rem;font-weight:600}
+.prod-card.featured .prod-category{color:rgba(255,255,255,0.4)}
+.prod-name{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:.25rem;line-height:1.2}
+.prod-card.featured .prod-name{color:var(--white);font-size:22px}
+.prod-desc{font-size:11px;color:var(--gray);line-height:1.7;margin-bottom:1rem}
+.prod-card.featured .prod-desc{color:rgba(255,255,255,0.5)}
+.prod-bottom{display:flex;justify-content:space-between;align-items:center}
+.prod-price{font-size:15px;font-weight:700;color:var(--ink)}
+.prod-card.featured .prod-price{color:var(--accent)}
+.add-btn{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--gray3);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:300;color:var(--ink);transition:all .2s;flex-shrink:0;font-family:'Space Grotesk',sans-serif}
+.add-btn:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.prod-card.featured .add-btn{border-color:rgba(255,255,255,0.2);color:var(--white)}
+.prod-card.featured .add-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.wide-text .prod-name{font-size:32px;font-weight:700;letter-spacing:-1px}
+.wide-text .prod-desc{font-size:13px;line-height:1.9;max-width:400px}
+.wide-text .prod-price{font-size:22px}
+.benefit-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+.bp{border:1px solid var(--gray3);border-radius:100px;padding:5px 12px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);font-weight:500}
+
+/* INGREDIENTS */
+.ingredients{padding:5rem 2.5rem;border-top:1px solid var(--gray3);display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.ing-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:1rem;font-weight:600}
+.ing-title{font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-1.5px;line-height:1;margin-bottom:1.5rem}
+.ing-title em{font-style:italic;font-weight:300;color:var(--gray)}
+.ing-body{font-size:13px;color:var(--gray);line-height:1.9;margin-bottom:2rem}
+.ing-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray3);border:1px solid var(--gray3)}
+.ing-item{background:var(--white);padding:1.25rem;transition:background .2s}
+.ing-item:hover{background:var(--off)}
+.ing-name{font-size:13px;font-weight:600;margin-bottom:.25rem}
+.ing-desc{font-size:11px;color:var(--gray);line-height:1.6}
+.ing-visual{border-radius:8px;overflow:hidden;aspect-ratio:1;position:relative}
+.ing-visual img{width:100%;height:100%;object-fit:cover}
+.ing-overlay{position:absolute;inset:0;background:rgba(12,12,12,0.5);display:flex;align-items:center;justify-content:center}
+.ing-circles{position:relative;width:200px;height:200px}
+.ic{position:absolute;border:1px solid rgba(255,255,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.8);font-weight:600;text-align:center;padding:.5rem}
+.ic1{width:140px;height:140px;top:30px;left:30px;animation:float1 6s ease-in-out infinite}
+.ic2{width:90px;height:90px;top:10px;right:10px;animation:float2 5s ease-in-out infinite .5s}
+.ic3{width:70px;height:70px;bottom:10px;left:20px;animation:float1 7s ease-in-out infinite 1s}
+@keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* REVIEWS */
+.reviews{padding:5rem 2.5rem;border-top:1px solid var(--gray3);background:var(--off)}
+.rev-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem}
+.rev-title{font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-1.5px;line-height:1}
+.rev-num{font-family:'Space Mono',monospace;font-size:52px;font-weight:700;line-height:1}
+.rev-sub{font-size:11px;color:var(--gray);letter-spacing:1px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray3)}
+.rc{background:var(--white);padding:2rem;transition:background .2s,color .2s}
+.rc:hover{background:var(--ink);color:var(--white)}
+.rc:hover .rc-text,.rc:hover .rc-name,.rc:hover .rc-product{color:var(--white)}
+.rc:hover .rc-stars{color:var(--accent)}
+.rc-stars{color:var(--ink);font-size:13px;margin-bottom:1rem;transition:color .2s;letter-spacing:2px}
+.rc-text{font-size:13px;color:var(--ink);line-height:1.8;margin-bottom:1.5rem;font-style:italic;transition:color .2s}
+.rc-name{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
+.rc-product{font-size:10px;color:var(--gray);margin-top:.25rem;transition:color .2s}
+
+/* CTA */
+.cta-banner{padding:5rem 2.5rem;background:var(--ink);display:flex;justify-content:space-between;align-items:center}
+.cta-title{font-size:clamp(36px,5vw,64px);font-weight:700;letter-spacing:-2px;color:var(--white);line-height:1}
+.cta-title span{color:var(--accent)}
+.cta-right{display:flex;flex-direction:column;gap:1rem;align-items:flex-end}
+.cta-sub{font-size:12px;color:rgba(255,255,255,0.4);max-width:280px;text-align:right;line-height:1.8}
+.cta-btn{background:var(--accent);color:var(--ink);border:none;padding:16px 40px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;border-radius:100px;transition:background .2s}
+.cta-btn:hover{background:var(--accent2)}
+
+/* FOOTER */
+.footer{padding:2rem 2.5rem;border-top:1px solid rgba(255,255,255,0.08);background:var(--ink);display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;letter-spacing:2px;color:var(--white)}
+.f-copy{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:1px}
+.f-credit{font-size:10px;color:rgba(200,255,0,0.4);letter-spacing:1px}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav{padding:0 1rem}
+  .nav-left .nav-pill:nth-child(2),.nav-left .nav-pill:nth-child(3){display:none}
+  .hero{padding:3rem 1rem 0}
+  .products{grid-template-columns:1fr 1fr}
+  .prod-card.featured,.prod-card.wide{grid-column:span 2}
+  .prod-card.wide{grid-template-columns:1fr;gap:1rem}
+  .ingredients{grid-template-columns:1fr;gap:2rem}
+  .ing-visual{aspect-ratio:16/9}
+  .rev-grid{grid-template-columns:1fr}
+  .cta-banner{flex-direction:column;gap:2rem;align-items:flex-start}
+  .cta-right{align-items:flex-start}
+  .footer{flex-direction:column;gap:.75rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <button class="nav-pill">SHOP +</button>
+    <button class="nav-pill">ABOUT +</button>
+    <button class="nav-pill">RITUAL</button>
+  </div>
+  <div class="nav-logo">SKNR+</div>
+  <div class="nav-right">
+    <button class="nav-icon">MASUK</button>
+    <button class="cart-btn">KERANJANG (0)</button>
+  </div>
+</nav>
+
+<div class="hero reveal">
+  <h1>SEMUA<br><span>PRODUK</span></h1>
+  <div class="filter-bar">
+    <button class="fcat active" data-cat="all"><div class="fcat-icon">✦</div><span class="fcat-label">Semua</span></button>
+    <button class="fcat" data-cat="cleanser"><div class="fcat-icon">💧</div><span class="fcat-label">Cleanser</span><span class="fcat-tag">Esensial</span></button>
+    <button class="fcat" data-cat="serum"><div class="fcat-icon">✦</div><span class="fcat-label">Serum</span><span class="fcat-tag">Bestseller</span></button>
+    <button class="fcat" data-cat="moisturizer"><div class="fcat-icon">○</div><span class="fcat-label">Moisturizer</span></button>
+    <button class="fcat" data-cat="sunscreen"><div class="fcat-icon">◎</div><span class="fcat-label">Sunscreen</span></button>
+    <button class="fcat" data-cat="mask"><div class="fcat-icon">◇</div><span class="fcat-label">Mask</span></button>
+    <button class="fcat" data-cat="eye"><div class="fcat-icon">◉</div><span class="fcat-label">Eye Care</span></button>
+    <button class="fcat" data-cat="bundle"><div class="fcat-icon">⊞</div><span class="fcat-label">Bundle</span><span class="fcat-tag">Hemat</span></button>
+  </div>
+</div>
+
+<div class="products reveal">
+  <!-- Featured: Serum -->
+  <div class="prod-card featured" data-cat="serum">
+    <div class="prod-img">
+      <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80" alt="Niacinamide Serum">
+      <div class="prod-new">NEW</div>
+    </div>
+    <div class="prod-category">Serum · Flagship</div>
+    <div class="prod-name">Brightening Niacinamide<br>10% + Zinc Serum</div>
+    <div class="prod-desc">Formula andalan kami. Meratakan warna kulit, mengecilkan pori, dan mengontrol sebum dalam 14 hari.</div>
+    <div class="prod-bottom"><div class="prod-price">Rp 189.000</div><button class="add-btn">+</button></div>
+  </div>
+
+  <!-- Moisturizer -->
+  <div class="prod-card" data-cat="moisturizer">
+    <div class="prod-img">
+      <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?w=600&q=80" alt="Barrier Repair Cream">
+    </div>
+    <div class="prod-category">Moisturizer</div>
+    <div class="prod-name">Barrier Repair Cream</div>
+    <div class="prod-desc">Ceramide & Hyaluronic Acid untuk kulit lembap 24 jam.</div>
+    <div class="prod-bottom"><div class="prod-price">Rp 159.000</div><button class="add-btn">+</button></div>
+  </div>
+
+  <!-- Sunscreen -->
+  <div class="prod-card" data-cat="sunscreen">
+    <div class="prod-img">
+      <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&q=80" alt="Daily UV Shield">
+    </div>
+    <div class="prod-category">Sunscreen · SPF 50+</div>
+    <div class="prod-name">Daily UV Shield<br>SPF 50+ PA++++</div>
+    <div class="prod-desc">Ringan, non-greasy, cocok di bawah makeup.</div>
+    <div class="prod-bottom"><div class="prod-price">Rp 129.000</div><button class="add-btn">+</button></div>
+  </div>
+
+  <!-- Cleanser -->
+  <div class="prod-card" data-cat="cleanser">
+    <div class="prod-img">
+      <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=80" alt="Gentle Foam Cleanser">
+    </div>
+    <div class="prod-category">Cleanser</div>
+    <div class="prod-name">Gentle Foam<br>Cleanser pH 5.5</div>
+    <div class="prod-desc">Bersih tanpa strip. Formula pH seimbang untuk semua jenis kulit.</div>
+    <div class="prod-bottom"><div class="prod-price">Rp 99.000</div><button class="add-btn">+</button></div>
+  </div>
+
+  <!-- Eye Care -->
+  <div class="prod-card" data-cat="eye">
+    <div class="prod-img">
+      <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80" alt="Caffeine Eye Serum">
+    </div>
+    <div class="prod-category">Eye Care</div>
+    <div class="prod-name">Caffeine Eye Serum</div>
+    <div class="prod-desc">Kurangi kantung & lingkaran hitam dalam 7 hari.</div>
+    <div class="prod-bottom"><div class="prod-price">Rp 139.000</div><button class="add-btn">+</button></div>
+  </div>
+
+  <!-- Mask -->
+  <div class="prod-card" data-cat="mask">
+    <div class="prod-img">
+      <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80" alt="Charcoal Clay Mask">
+      <div class="prod-new">HOT</div>
+    </div>
+    <div class="prod-category">Mask</div>
+    <div class="prod-name">Charcoal Detox<br>Clay Mask</div>
+    <div class="prod-desc">Deep cleansing seminggu sekali untuk kulit bersih maksimal.</div>
+    <div class="prod-bottom"><div class="prod-price">Rp 119.000</div><button class="add-btn">+</button></div>
+  </div>
+
+  <!-- Bundle -->
+  <div class="prod-card wide" data-cat="bundle">
+    <div class="prod-img">
+      <img src="https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=800&q=80" alt="Complete Ritual Kit">
+      <div class="prod-new">BUNDLE</div>
+    </div>
+    <div class="wide-text">
+      <div class="prod-category">Starter Bundle · Hemat 30%</div>
+      <div class="prod-name">Complete Ritual<br>Starter Kit</div>
+      <div class="benefit-pills">
+        <span class="bp">Cleanser</span>
+        <span class="bp">Serum</span>
+        <span class="bp">Moisturizer</span>
+        <span class="bp">SPF 50+</span>
+      </div>
+      <div class="prod-desc">Rutinitas lengkap pagi & malam untuk pemula. Semua yang kamu butuhkan dalam satu box — formulasi yang saling bersinergi untuk hasil optimal.</div>
+      <div class="prod-bottom">
+        <div class="prod-price">Rp 449.000 <span style="font-size:13px;color:var(--gray);text-decoration:line-through;font-weight:400">Rp 576.000</span></div>
+        <button class="add-btn" style="width:auto;border-radius:100px;padding:0 20px;font-size:11px;letter-spacing:1px">TAMBAH +</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INGREDIENTS -->
+<div class="ingredients reveal">
+  <div>
+    <div class="ing-label">Formula kami</div>
+    <h2 class="ing-title">Bahan<br><em>Aktif</em><br>Terpilih</h2>
+    <p class="ing-body">Setiap bahan dipilih berdasarkan bukti ilmiah. Tidak ada filler, tidak ada parfum berlebihan — hanya yang kulit Anda butuhkan.</p>
+    <div class="ing-list">
+      <div class="ing-item"><div class="ing-name">Niacinamide 10%</div><div class="ing-desc">Meratakan warna & mengontrol sebum</div></div>
+      <div class="ing-item"><div class="ing-name">Hyaluronic Acid</div><div class="ing-desc">Hidrasi mendalam berlapis</div></div>
+      <div class="ing-item"><div class="ing-name">Ceramide NP</div><div class="ing-desc">Perbaiki skin barrier</div></div>
+      <div class="ing-item"><div class="ing-name">Centella Asiatica</div><div class="ing-desc">Menenangkan & anti-inflamasi</div></div>
+    </div>
+  </div>
+  <div class="ing-visual">
+    <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80" alt="Skincare ingredients">
+    <div class="ing-overlay">
+      <div class="ing-circles">
+        <div class="ic ic1">Niacinamide<br>10%</div>
+        <div class="ic ic2">HA<br>Complex</div>
+        <div class="ic ic3">Cica</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews reveal">
+  <div class="rev-head">
+    <h2 class="rev-title">APA KATA<br>MEREKA</h2>
+    <div style="text-align:right">
+      <div class="rev-num">4.9</div>
+      <div class="rev-sub">dari 2.400+ ulasan</div>
+    </div>
+  </div>
+  <div class="rev-grid">
+    <div class="rc">
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">"Kulit gue yang sensitif akhirnya nemu produk yang cocok. Niacinamide serumnya lembut banget, ga bikin iritasi sama sekali."</p>
+      <div class="rc-name">Anita R.</div>
+      <div class="rc-product">Brightening Serum · Verified</div>
+    </div>
+    <div class="rc">
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">"Starter kit-nya worth it banget! Dalam 3 minggu kulit udah keliatan lebih cerah dan pori-pori mengecil. Recommended!"</p>
+      <div class="rc-name">Maya S.</div>
+      <div class="rc-product">Complete Ritual Kit · Verified</div>
+    </div>
+    <div class="rc">
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">"Sunscreen-nya ringan banget, ga bikin greasy. Udah jadi daily staple gue. Packaging juga minimalis dan elegan."</p>
+      <div class="rc-name">Dini P.</div>
+      <div class="rc-product">Daily UV Shield · Verified</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-banner reveal">
+  <h2 class="cta-title">MULAI<br>RITUAL<br><span>ANDA.</span></h2>
+  <div class="cta-right">
+    <p class="cta-sub">Gratis ongkir untuk pembelian pertama. Garansi uang kembali 30 hari jika tidak cocok.</p>
+    <button class="cta-btn">BELANJA SEKARANG →</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="f-logo">SKNR+</div>
+  <div class="f-copy">© 2026 SKNR+ · Medan, Indonesia</div>
+  <div class="f-credit">Made by Uify Studio</div>
+</footer>
+
+<script>
+// Filter kategori
+document.querySelectorAll('.fcat').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.fcat').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.prod-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  });
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+// Cart counter
+let count = 0;
+document.querySelectorAll('.add-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    count++;
+    document.querySelector('.cart-btn').textContent = `KERANJANG (${count})`;
+  });
+});
+</script>
+</body>
+</html>
