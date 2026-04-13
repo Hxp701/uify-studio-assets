@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nusantara Co. — Solusi Bisnis Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#faf7f2;color:#1a1610;overflow-x:hidden}
+:root{--cream:#faf7f2;--cream2:#f2ede4;--dark:#1a1610;--gold:#c9a84c;--text2:rgba(26,22,16,0.6);--text3:rgba(26,22,16,0.35);--border:rgba(201,168,76,0.2);--serif:'Cormorant Garamond',serif}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 3rem;background:rgba(250,247,242,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{font-family:var(--serif);font-size:22px;color:var(--dark)}.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}.nav-links a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s}.nav-links a:hover{color:var(--gold)}
+.nav-btn{padding:9px 22px;background:var(--dark);color:var(--cream);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;transition:background .2s}.nav-btn:hover{background:#2c2618}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 5rem;background:linear-gradient(135deg,#faf7f2 65%,#f2ede4 100%);position:relative;overflow:hidden}
+.hero-circle{position:absolute;right:-100px;top:50%;transform:translateY(-50%);width:500px;height:500px;border-radius:50%;border:1px solid rgba(201,168,76,0.1);pointer-events:none}
+.hero-circle2{position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:360px;height:360px;border-radius:50%;border:1px solid rgba(201,168,76,0.06);pointer-events:none}
+.hero-inner{max-width:680px;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);padding:6px 16px;margin-bottom:2rem}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.hero h1{font-family:var(--serif);font-size:clamp(48px,6vw,80px);font-weight:300;line-height:1.1;color:var(--dark);margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--gold)}.hero h1 strong{font-weight:600;display:block}
+.hero-sub{font-size:16px;font-weight:300;line-height:1.8;color:var(--text2);max-width:460px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:4rem}
+.btn-dark{padding:13px 30px;background:var(--dark);color:var(--cream);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;transition:all .2s}.btn-dark:hover{background:#2c2618}
+.btn-light{padding:13px 30px;background:transparent;color:var(--dark);border:1px solid rgba(26,22,16,.25);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;transition:all .2s}.btn-light:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{display:flex;gap:3rem;padding-top:2.5rem;border-top:1px solid var(--border)}
+.stat-n{font-family:var(--serif);font-size:38px;font-weight:300;color:var(--dark);line-height:1}.stat-n span{color:var(--gold)}
+.stat-l{font-size:12px;color:var(--text3);margin-top:4px}
+
+.marquee{padding:1.25rem 0;background:var(--cream2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
+.marquee-inner{display:flex;gap:3rem;white-space:nowrap;animation:scroll 18s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-inner span{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--text3);flex-shrink:0}
+.marquee-inner span b{color:var(--gold);font-weight:400;margin:0 .5rem}
+
+section{padding:6rem 3rem}
+.sec-label{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.sec-num{font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--gold)}
+.sec-line{width:48px;height:1px;background:var(--gold)}
+.sec-tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+.sec-title{font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:300;line-height:1.2;color:var(--dark);margin-bottom:1rem}
+.sec-title em{font-style:italic;color:var(--gold)}
+.sec-sub{font-size:15px;font-weight:300;color:var(--text2);line-height:1.8;max-width:480px}
+
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3.5rem;background:var(--border)}
+.svc{background:var(--cream);padding:2.25rem;transition:background .3s,color .3s;cursor:default}
+.svc:hover{background:var(--dark);color:var(--cream)}.svc:hover .svc-desc{color:rgba(250,247,242,.55)}.svc:hover .svc-n{color:var(--gold)}
+.svc-n{font-size:12px;color:var(--text3);margin-bottom:1.25rem;letter-spacing:.08em}
+.svc-icon{font-size:24px;margin-bottom:1.25rem}
+.svc-name{font-family:var(--serif);font-size:21px;font-weight:400;margin-bottom:.6rem}
+.svc-desc{font-size:13px;font-weight:300;line-height:1.7;color:var(--text2)}
+
+.about-sec{background:var(--dark)}
+.about-sec .sec-num,.about-sec .sec-line{color:var(--gold)}
+.about-sec .sec-tag{color:rgba(255,255,255,.35)}
+.about-sec .sec-title{color:#faf7f2}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3.5rem}
+.about-img{aspect-ratio:4/5;background:#2c2618;position:relative;overflow:hidden}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about-badge{position:absolute;bottom:1.75rem;left:-1.5rem;background:var(--gold);padding:1.1rem 1.4rem}
+.about-badge-n{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--dark);line-height:1}
+.about-badge-l{font-size:10px;font-weight:500;color:var(--dark);letter-spacing:.08em;opacity:.7}
+.about-quote{font-family:var(--serif);font-size:19px;font-weight:300;font-style:italic;color:rgba(250,247,242,.65);line-height:1.75;margin-bottom:1.5rem}
+.about-text{font-size:14px;font-weight:300;color:rgba(250,247,242,.5);line-height:1.8;margin-bottom:2rem}
+.about-vals{display:flex;flex-direction:column;gap:1.25rem}
+.val{display:flex;gap:.875rem;align-items:flex-start;padding-bottom:1.25rem;border-bottom:1px solid rgba(201,168,76,.1)}.val:last-child{border:none}
+.val-icon{width:34px;height:34px;border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.val-name{font-family:var(--serif);font-size:17px;color:#faf7f2;margin-bottom:3px}
+.val-desc{font-size:12px;color:rgba(250,247,242,.45);font-weight:300;line-height:1.6}
+
+.proses-sec{background:var(--cream2)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:3.5rem}
+.step{padding:2rem 1.25rem}
+.step-n{font-family:var(--serif);font-size:42px;font-weight:300;color:rgba(201,168,76,.18);line-height:1;margin-bottom:.75rem}
+.step-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);margin-bottom:1.25rem}
+.step-name{font-family:var(--serif);font-size:18px;color:var(--dark);margin-bottom:.5rem}
+.step-desc{font-size:12px;color:var(--text2);font-weight:300;line-height:1.65}
+
+.paket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.paket{border:1px solid var(--border);padding:2rem;transition:border-color .3s,transform .3s}.paket:hover{border-color:var(--gold);transform:translateY(-4px)}
+.paket.best{background:var(--dark);border-color:var(--gold)}.paket.best .paket-name,.paket.best .paket-price{color:#faf7f2}.paket.best .paket-feat{color:rgba(250,247,242,.6);border-color:rgba(201,168,76,.15)}.paket.best .paket-btn{color:#faf7f2;border-color:var(--gold)}.paket.best .paket-desc,.paket.best .paket-per{color:rgba(250,247,242,.5)}
+.paket-badge{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;background:var(--gold);color:var(--dark);margin-bottom:1.25rem}
+.paket-name{font-family:var(--serif);font-size:22px;color:var(--dark);margin-bottom:.5rem}
+.paket-price{font-family:var(--serif);font-size:34px;font-weight:300;color:var(--gold);margin-bottom:.25rem}
+.paket-per{font-size:12px;color:var(--text3);margin-bottom:1.25rem}
+.paket-desc{font-size:13px;color:var(--text2);font-weight:300;line-height:1.65;margin-bottom:1.25rem}
+.paket-feats{display:flex;flex-direction:column;gap:7px;margin-bottom:1.5rem}
+.paket-feat{font-size:12px;color:var(--text2);padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}.paket-feat::before{content:'✓';color:var(--gold);font-size:11px}
+.paket-btn{width:100%;padding:11px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:.04em;background:transparent;border:1px solid rgba(26,22,16,.2);cursor:pointer;color:var(--dark);transition:all .2s}.paket-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+
+.testi-sec{background:var(--dark)}.testi-sec .sec-num{color:var(--gold)}.testi-sec .sec-tag{color:rgba(255,255,255,.35)}.testi-sec .sec-title{color:#faf7f2}
+.testis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,.08);margin-top:3.5rem}
+.testi{background:var(--dark);padding:2.25rem;transition:background .3s}.testi:hover{background:#221e14}
+.testi-q{font-family:var(--serif);font-size:48px;color:var(--gold);opacity:.4;line-height:.8;margin-bottom:.875rem}
+.testi-text{font-family:var(--serif);font-size:16px;font-weight:300;font-style:italic;color:rgba(250,247,242,.75);line-height:1.75;margin-bottom:1.5rem}
+.testi-author{display:flex;align-items:center;gap:10px}
+.testi-av{width:38px;height:38px;border-radius:50%;overflow:hidden;border:1px solid rgba(201,168,76,.2);flex-shrink:0}.testi-av img{width:100%;height:100%;object-fit:cover}
+.testi-name{font-size:13px;font-weight:500;color:#faf7f2}.testi-role{font-size:11px;color:rgba(250,247,242,.35);margin-top:2px}
+
+.tim-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.75rem;margin-top:3.5rem}
+.member{text-align:center}
+.member-av{aspect-ratio:1;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem;transition:border-color .3s}.member:hover .member-av{border-color:var(--gold)}
+.member-av img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .4s}.member:hover .member-av img{transform:scale(1.05)}
+.member-name{font-family:var(--serif);font-size:19px;color:var(--dark);margin-bottom:3px}.member-role{font-size:12px;color:var(--text3);letter-spacing:.04em}
+
+.kontak-sec{background:var(--cream2)}
+.kontak-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3.5rem}
+.kontak-infos{display:flex;flex-direction:column;gap:1.75rem}
+.k-item{display:flex;gap:.875rem;align-items:flex-start;padding-bottom:1.75rem;border-bottom:1px solid var(--border)}.k-item:last-child{border:none}
+.k-icon{width:38px;height:38px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.k-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.k-val{font-family:var(--serif);font-size:17px;color:var(--dark)}
+.form{display:flex;flex-direction:column;gap:.875rem}
+.f-group{display:flex;flex-direction:column;gap:5px}
+.f-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+.f-input{font-family:'DM Sans',sans-serif;font-size:14px;padding:11px 14px;background:var(--cream);border:1px solid var(--border);color:var(--dark);outline:none;transition:border-color .2s}.f-input:focus{border-color:var(--gold)}
+.f-textarea{min-height:110px;resize:vertical}
+.f-submit{padding:13px;background:var(--dark);color:var(--cream);border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;margin-top:.25rem}.f-submit:hover{background:var(--gold);color:var(--dark)}
+
+footer{background:var(--dark);color:#faf7f2;padding:4rem 3rem 2rem}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(201,168,76,.12);margin-bottom:2rem}
+.footer-logo{font-family:var(--serif);font-size:22px;margin-bottom:.75rem}.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:13px;font-weight:300;color:rgba(250,247,242,.45);line-height:1.7;max-width:260px}
+.footer-col h4{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col ul a{font-size:13px;font-weight:300;color:rgba(250,247,242,.45);text-decoration:none;transition:color .2s}.footer-col ul a:hover{color:var(--gold)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+.footer-copy{font-size:12px;color:rgba(250,247,242,.25)}
+.socials{display:flex;gap:.75rem}
+.soc{width:34px;height:34px;border:1px solid rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(250,247,242,.4);text-decoration:none;transition:all .2s}.soc:hover{border-color:var(--gold);color:var(--gold)}
+
+#backTop{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;background:var(--dark);color:var(--cream);border:1px solid rgba(201,168,76,.25);font-size:18px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:50;transition:all .2s}.backTop:hover{background:var(--gold);color:var(--dark)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}.nav-links{display:none}
+  .hero{padding:7rem 1.5rem 4rem}
+  section{padding:4rem 1.5rem}
+  .services,.testis{grid-template-columns:1fr 1fr}
+  .about-grid,.kontak-grid{grid-template-columns:1fr}
+  .paket-grid{grid-template-columns:1fr}
+  .tim-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:500px){
+  .hero h1{font-size:38px}
+  .services,.testis{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Nusantara<span>.</span>Co</div>
+  <ul class="nav-links">
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#proses">Proses</a></li>
+    <li><a href="#paket">Paket</a></li>
+    <li><a href="#tim">Tim</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+  <button class="nav-btn" onclick="document.getElementById('kontak').scrollIntoView({behavior:'smooth'})">Hubungi Kami</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-circle"></div>
+  <div class="hero-circle2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="badge-dot"></span>Dipercaya Sejak 2018</div>
+    <h1>Solusi Bisnis<br><em>Terpercaya</em><br><strong>untuk Anda</strong></h1>
+    <p class="hero-sub">Kami hadir untuk membantu bisnis Anda berkembang dengan layanan profesional, terpercaya, dan berdedikasi tinggi terhadap kepuasan pelanggan.</p>
+    <div class="hero-btns">
+      <button class="btn-dark" onclick="document.getElementById('layanan').scrollIntoView({behavior:'smooth'})">Lihat Layanan →</button>
+      <button class="btn-light" onclick="document.getElementById('kontak').scrollIntoView({behavior:'smooth'})">Konsultasi Gratis</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-n">500<span>+</span></div><div class="stat-l">Klien Puas</div></div>
+      <div><div class="stat-n">6<span>+</span></div><div class="stat-l">Tahun Pengalaman</div></div>
+      <div><div class="stat-n">98<span>%</span></div><div class="stat-l">Tingkat Kepuasan</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>Kualitas Terjamin<b>✦</b></span><span>Layanan Profesional<b>✦</b></span><span>Harga Terjangkau<b>✦</b></span><span>Tepat Waktu<b>✦</b></span><span>Tim Berpengalaman<b>✦</b></span><span>Kepuasan Pelanggan<b>✦</b></span>
+    <span>Kualitas Terjamin<b>✦</b></span><span>Layanan Profesional<b>✦</b></span><span>Harga Terjangkau<b>✦</b></span><span>Tepat Waktu<b>✦</b></span><span>Tim Berpengalaman<b>✦</b></span><span>Kepuasan Pelanggan<b>✦</b></span>
+  </div>
+</div>
+
+<section id="layanan">
+  <div class="reveal">
+    <div class="sec-label"><span class="sec-num">01</span><div class="sec-line"></div><span class="sec-tag">Layanan Kami</span></div>
+    <h2 class="sec-title">Apa yang Kami<br><em>Tawarkan</em> untuk Anda</h2>
+    <p class="sec-sub">Rangkaian layanan lengkap untuk memenuhi kebutuhan bisnis Anda di era modern.</p>
+  </div>
+  <div class="services reveal">
+    <div class="svc"><div class="svc-n">01</div><div class="svc-icon">🎯</div><div class="svc-name">Konsultasi Bisnis</div><div class="svc-desc">Analisis dan strategi bisnis yang tepat untuk pertumbuhan usaha Anda secara berkelanjutan.</div></div>
+    <div class="svc"><div class="svc-n">02</div><div class="svc-icon">📊</div><div class="svc-name">Manajemen Keuangan</div><div class="svc-desc">Pengelolaan keuangan bisnis yang transparan dan akuntabel untuk kesehatan finansial perusahaan.</div></div>
+    <div class="svc"><div class="svc-n">03</div><div class="svc-icon">📣</div><div class="svc-name">Pemasaran Digital</div><div class="svc-desc">Strategi pemasaran digital terintegrasi yang menjangkau target pasar secara efektif dan efisien.</div></div>
+    <div class="svc"><div class="svc-n">04</div><div class="svc-icon">🤝</div><div class="svc-name">Kemitraan Usaha</div><div class="svc-desc">Membangun jaringan kemitraan strategis untuk memperluas jangkauan bisnis Anda.</div></div>
+    <div class="svc"><div class="svc-n">05</div><div class="svc-icon">⚙️</div><div class="svc-name">Operasional & Logistik</div><div class="svc-desc">Optimalisasi sistem operasional untuk meningkatkan efisiensi dan produktivitas bisnis.</div></div>
+    <div class="svc"><div class="svc-n">06</div><div class="svc-icon">🛡️</div><div class="svc-name">Legalitas & Perizinan</div><div class="svc-desc">Pengurusan legalitas dan perizinan usaha secara lengkap agar bisnis berjalan aman.</div></div>
+  </div>
+</section>
+
+<section id="tentang" class="about-sec">
+  <div class="reveal">
+    <div class="sec-label"><span class="sec-num">02</span><div class="sec-line"></div><span class="sec-tag">Tentang Kami</span></div>
+    <h2 class="sec-title">Lebih dari Sekadar<br><em>Mitra Bisnis</em></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-img reveal">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Kantor"/>
+      <div class="about-badge"><div class="about-badge-n">6+</div><div class="about-badge-l">Tahun Pengalaman</div></div>
+    </div>
+    <div class="reveal">
+      <p class="about-quote">"Kami percaya setiap bisnis, besar maupun kecil, berhak mendapatkan layanan terbaik."</p>
+      <p class="about-text">Nusantara Co. didirikan dengan visi sederhana: menjadi mitra terpercaya bagi pelaku usaha Indonesia. Dengan tim berpengalaman, kami telah membantu ratusan bisnis mencapai potensi terbaiknya.</p>
+      <div class="about-vals">
+        <div class="val"><div class="val-icon">💎</div><div><div class="val-name">Integritas</div><div class="val-desc">Kejujuran dan transparansi dalam setiap aspek layanan kami.</div></div></div>
+        <div class="val"><div class="val-icon">🚀</div><div><div class="val-name">Inovasi</div><div class="val-desc">Solusi terkini yang relevan dengan perkembangan bisnis masa kini.</div></div></div>
+        <div class="val"><div class="val-icon">❤️</div><div><div class="val-name">Dedikasi</div><div class="val-desc">Komitmen penuh terhadap kepuasan dan pertumbuhan setiap klien.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proses" class="proses-sec">
+  <div class="reveal">
+    <div class="sec-label"><span class="sec-num">03</span><div class="sec-line"></div><span class="sec-tag">Cara Kerja</span></div>
+    <h2 class="sec-title">Proses Sederhana,<br>Hasil yang <em>Luar Biasa</em></h2>
+  </div>
+  <div class="steps reveal">
+    <div class="step"><div class="step-n">01</div><div class="step-dot"></div><div class="step-name">Konsultasi Awal</div><div class="step-desc">Diskusi mendalam tentang kebutuhan bisnis Anda bersama tim ahli kami.</div></div>
+    <div class="step"><div class="step-n">02</div><div class="step-dot"></div><div class="step-name">Analisis & Perencanaan</div><div class="step-desc">Kami merancang solusi yang paling tepat untuk kebutuhan Anda.</div></div>
+    <div class="step"><div class="step-n">03</div><div class="step-dot"></div><div class="step-name">Eksekusi</div><div class="step-desc">Implementasi rencana dengan pengawasan ketat untuk kualitas terbaik.</div></div>
+    <div class="step"><div class="step-n">04</div><div class="step-dot"></div><div class="step-name">Evaluasi & Laporan</div><div class="step-desc">Pemantauan dan pelaporan berkala untuk memastikan target tercapai.</div></div>
+    <div class="step"><div class="step-n">05</div><div class="step-dot"></div><div class="step-name">Pendampingan</div><div class="step-desc">Dukungan berkelanjutan untuk pertumbuhan jangka panjang bisnis Anda.</div></div>
+  </div>
+</section>
+
+<section id="paket">
+  <div class="reveal">
+    <div class="sec-label"><span class="sec-num">04</span><div class="sec-line"></div><span class="sec-tag">Paket Layanan</span></div>
+    <h2 class="sec-title">Pilih Paket yang<br><em>Sesuai</em> Kebutuhan</h2>
+    <p class="sec-sub">Paket fleksibel yang dapat disesuaikan dengan skala bisnis Anda.</p>
+  </div>
+  <div class="paket-grid reveal">
+    <div class="paket">
+      <div class="paket-name">Starter</div><div class="paket-price">Rp 500rb</div><div class="paket-per">per bulan</div>
+      <div class="paket-desc">Cocok untuk bisnis yang baru memulai perjalanannya.</div>
+      <div class="paket-feats"><div class="paket-feat">Konsultasi 2x/bulan</div><div class="paket-feat">Laporan Bulanan</div><div class="paket-feat">Email Support</div><div class="paket-feat">Panduan Bisnis Dasar</div></div>
+      <button class="paket-btn">Pilih Paket</button>
+    </div>
+    <div class="paket best">
+      <div class="paket-badge">Terpopuler</div>
+      <div class="paket-name">Professional</div><div class="paket-price">Rp 1,5jt</div><div class="paket-per">per bulan</div>
+      <div class="paket-desc">Solusi lengkap untuk bisnis yang ingin berkembang lebih cepat.</div>
+      <div class="paket-feats"><div class="paket-feat">Konsultasi Tak Terbatas</div><div class="paket-feat">Laporan Mingguan</div><div class="paket-feat">WhatsApp Priority</div><div class="paket-feat">Strategi Pemasaran</div><div class="paket-feat">Analisis Kompetitor</div></div>
+      <button class="paket-btn">Pilih Paket</button>
+    </div>
+    <div class="paket">
+      <div class="paket-name">Enterprise</div><div class="paket-price">Custom</div><div class="paket-per">harga negosiasi</div>
+      <div class="paket-desc">Solusi khusus untuk perusahaan dengan kebutuhan skala besar.</div>
+      <div class="paket-feats"><div class="paket-feat">Semua Fitur Professional</div><div class="paket-feat">Dedicated Account Manager</div><div class="paket-feat">On-site Visit</div><div class="paket-feat">Custom Reporting</div><div class="paket-feat">Support 24/7</div></div>
+      <button class="paket-btn">Hubungi Kami</button>
+    </div>
+  </div>
+</section>
+
+<section id="testimoni" class="testi-sec">
+  <div class="reveal">
+    <div class="sec-label"><span class="sec-num">05</span><div class="sec-line"></div><span class="sec-tag">Testimoni</span></div>
+    <h2 class="sec-title">Apa Kata<br><em>Klien Kami</em></h2>
+  </div>
+  <div class="testis reveal">
+    <div class="testi"><div class="testi-q">"</div><div class="testi-text">Nusantara Co. benar-benar mengubah cara kami mengelola bisnis. Omzet kami meningkat 40% dalam 6 bulan pertama.</div><div class="testi-author"><div class="testi-av"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="Budi"/></div><div><div class="testi-name">Budi Santoso</div><div class="testi-role">Pemilik Toko Batik Nusantara</div></div></div></div>
+    <div class="testi"><div class="testi-q">"</div><div class="testi-text">Tim yang sangat profesional dan responsif. Mereka memahami kebutuhan bisnis kami dan memberikan solusi tepat sasaran.</div><div class="testi-author"><div class="testi-av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Siti"/></div><div><div class="testi-name">Siti Rahayu</div><div class="testi-role">CEO Kuliner Ibu Siti</div></div></div></div>
+    <div class="testi"><div class="testi-q">"</div><div class="testi-text">Investasi terbaik yang pernah kami lakukan. Konsultasi mereka membantu menghindari banyak kesalahan bisnis yang fatal.</div><div class="testi-author"><div class="testi-av"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Ahmad"/></div><div><div class="testi-name">Ahmad Fauzi</div><div class="testi-role">Direktur CV Maju Bersama</div></div></div></div>
+  </div>
+</section>
+
+<section id="tim">
+  <div class="reveal">
+    <div class="sec-label"><span class="sec-num">06</span><div class="sec-line"></div><span class="sec-tag">Tim Kami</span></div>
+    <h2 class="sec-title">Orang-orang di Balik<br><em>Kesuksesan</em> Anda</h2>
+  </div>
+  <div class="tim-grid reveal">
+    <div class="member"><div class="member-av"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Arif"/></div><div class="member-name">Arif Wibowo</div><div class="member-role">CEO & Founder</div></div>
+    <div class="member"><div class="member-av"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Diana"/></div><div class="member-name">Diana Putri</div><div class="member-role">Head of Marketing</div></div>
+    <div class="member"><div class="member-av"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Reza"/></div><div class="member-name">Reza Firmansyah</div><div class="member-role">Business Analyst</div></div>
+    <div class="member"><div class="member-av"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Maya"/></div><div class="member-name">Maya Sari</div><div class="member-role">Client Relations</div></div>
+  </div>
+</section>
+
+<section id="kontak" class="kontak-sec">
+  <div class="reveal">
+    <div class="sec-label"><span class="sec-num">07</span><div class="sec-line"></div><span class="sec-tag">Kontak</span></div>
+    <h2 class="sec-title">Mari Mulai<br><em>Percakapan</em></h2>
+    <p class="sec-sub">Hubungi kami untuk konsultasi gratis. Tim kami siap membantu bisnis Anda.</p>
+  </div>
+  <div class="kontak-grid reveal">
+    <div class="kontak-infos">
+      <div class="k-item"><div class="k-icon">📍</div><div><div class="k-label">Alamat</div><div class="k-val">Jl. Sudirman No. 123, Jakarta Pusat</div></div></div>
+      <div class="k-item"><div class="k-icon">📱</div><div><div class="k-label">WhatsApp</div><div class="k-val">+62 812-3456-7890</div></div></div>
+      <div class="k-item"><div class="k-icon">✉️</div><div><div class="k-label">Email</div><div class="k-val">hello@nusantara.co</div></div></div>
+      <div class="k-item"><div class="k-icon">🕐</div><div><div class="k-label">Jam Operasional</div><div class="k-val">Senin – Jumat, 08.00 – 17.00 WIB</div></div></div>
+    </div>
+    <div class="form">
+      <div class="f-group"><label class="f-label">Nama Lengkap</label><input class="f-input" type="text" placeholder="Masukkan nama Anda"/></div>
+      <div class="f-group"><label class="f-label">Email</label><input class="f-input" type="email" placeholder="email@bisnis.com"/></div>
+      <div class="f-group"><label class="f-label">Nama Bisnis</label><input class="f-input" type="text" placeholder="Nama usaha Anda"/></div>
+      <div class="f-group"><label class="f-label">Pesan</label><textarea class="f-input f-textarea" placeholder="Ceritakan kebutuhan bisnis Anda..."></textarea></div>
+      <button class="f-submit" onclick="alert('Terima kasih! Tim kami akan segera menghubungi Anda.')">Kirim Pesan →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">Nusantara<span>.</span>Co</div><div class="footer-desc">Mitra terpercaya untuk pertumbuhan bisnis Anda. Bersama kami, wujudkan potensi terbaik usaha Anda.</div></div>
+    <div class="footer-col"><h4>Layanan</h4><ul><li><a href="#layanan">Konsultasi Bisnis</a></li><li><a href="#layanan">Manajemen Keuangan</a></li><li><a href="#layanan">Pemasaran Digital</a></li><li><a href="#layanan">Kemitraan Usaha</a></li></ul></div>
+    <div class="footer-col"><h4>Perusahaan</h4><ul><li><a href="#tentang">Tentang Kami</a></li><li><a href="#tim">Tim</a></li><li><a href="#proses">Cara Kerja</a></li><li><a href="#testimoni">Testimoni</a></li></ul></div>
+    <div class="footer-col"><h4>Kontak</h4><ul><li><a href="#">WhatsApp</a></li><li><a href="#">Email</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Nusantara Co. — Demo by Uify Studio</div>
+    <div class="socials"><a class="soc" href="#">ig</a><a class="soc" href="#">fb</a><a class="soc" href="#">in</a><a class="soc" href="#">wa</a></div>
+  </div>
+</footer>
+
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+}, {threshold:0.08});
+reveals.forEach(el => io.observe(el));
+window.addEventListener('scroll', () => {
+  const bt = document.getElementById('backTop');
+  bt.style.display = window.scrollY > 400 ? 'flex' : 'none';
+});
+</script>
+</body>
+</html>
